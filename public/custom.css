@@ -1,0 +1,23 @@
+header {
+    background-color:#056B37;
+    height: 80px;
+    margin-bottom:30px;
+}
+#logo {
+    background-image: url('logo.png');
+    display: block;
+    width: 290px;
+    height: 72px;
+    text-indent: -9999px;
+}
+ul.nav a:hover { 
+    color: #000 !important; 
+    background-color: transparent;
+}
+ul.nav {
+    margin-top: 20px;
+}
+ul.nav a {
+    color:#000;
+    font-size:20px;
+}

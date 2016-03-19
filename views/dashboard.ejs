@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="/custom.css">
+    </head>
+    <body>
+        <header class="container-fluid">
+            <div class="container">
+                <div class="col-md-4">
+                <a href="/" id="logo">Bankable</a>
+                </div>
+                <div class="col-md-8">
+                    <% if (isAuthenticated) { %>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                    <% } else { %>
+                    
+                    <% } %>
+                </div>
+            </div>
+        </header>
+        <section class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2>Bankit</h2>
+                    <h3>Profile</h3>
+                    <p>Name: <%= user.name%> </p>
+                    
+                </div>
+            </div>
+            
+        </section>
+    </body>
+</html>
