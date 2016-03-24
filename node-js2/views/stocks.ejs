@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stocks</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/custom.css">
+    </head>
+    <body>
+        <header class="container-fluid">
+            <div class="container">
+                <div class="col-md-4">
+                <a href="/" id="logo">Bankable</a>
+                </div>
+                <div class="col-md-8">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="/stocks">Stocks</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <section class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Stocks</h2>
+                    <% if (message.length) {  %>
+                    
+                        <% if(message[0] === "Stock added successfully") { %>
+                            <div class="alert alert-success">
+                        <% } else { %>
+                            <div class="alert alert-danger">
+                        <% } %>
+                            <%= message %>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="col-md-12 text-center">
+                    <% if(typeof stocks === 'object' && stocks !== null && stocks !== 'undefined') { %>
+                        <div class="alert alter-info"> 
+                            There are more than one stock which might meet your criteria. Please select one from list below:
+                        </div>
+                    <% } %>
+                    <form action="" method="POST" role="form" class="form-inline">                        
+                        <div class="form-group">
+                            <% if(typeof stocks === 'object' && stocks !== null && stocks !== 'undefined' && stocks.length) { %>
+                               
+                                <select name='name' class='form-control' required>    
+                                    <% for(var key in stocks) { %>
+                                        <option value='stock-symbol:<%= stocks[key].symbol %>,stock-name:<%= stocks[key].name %>'><%= stocks[key].name %></option>
+                                    <% } %>
+                                </select>
+                            <% } else { %>
+                                <input type="text" name="name" class="form-control" title="Please enter minimum 7 and maximum of 100 characters" required>
+                            <% } %>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Find Stock" class="btn btn-default form-control">
+                        </div>                        
+                    </form>
+                </div>
+                <div class="col-md-12">
+                    <p></p>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><h2>Stocks</h2></div>
+                        <% if(typeof user_stocks === 'object' && user_stocks !== null && user_stocks !== 'undefined' && user_stocks.length) { %>
+                        <% for(var key in user_stocks) { %>
+                        <div class="col-md-8 col-md-offset-2">
+                            <%= user_stocks[key].name %> (<%= user_stocks[key].symbol %>) @ <%= user_stocks[key].price %>  <a href='stocks/<%= user_stocks[key].id %>/delete'>Delete</a>
+                        </div>
+                        
+                        <% } %>
+                        <% } else { %>
+                        <div class="col-md-8 col-md-offset-2">
+                            No Stocks added. 
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

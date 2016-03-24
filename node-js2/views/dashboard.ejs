@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="/custom.css">
+    </head>
+    <body>
+        <header class="container-fluid">
+            <div class="container">
+                <div class="col-md-4">
+                <a href="/" id="logo">Bankable</a>
+                </div>
+                <div class="col-md-8">
+                    <% if (isAuthenticated) { %>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="/profile">Profile</a></li>
+                            <li><a href="/stocks">Stocks</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                            <li><a href="/logout">Log Out</a></li>
+                        </ul>
+                    <% } %>
+                </div>
+            </div>
+        </header>
+        <section class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2>Bankit</h2>
+                    <h3>Profile</h3>
+                    <p>Name: <%= user.name%> </p>
+                    <p>
+                    <% if (typeof user.date !== 'undefined' && user.date !== null && user.date !== '') { %>
+                        Date: <%= user.date%>
+                    <% } %>
+                    </p>
+                    <p>
+                    <% if (user.save_amount !== 'undefined' && user.save_amount !== null && user.save_amount !== '') { %>
+                        Save Amount: $<%= parseFloat(user.save_amount).toFixed(2)%>
+                    <% } %>
+                    </p>
+                    <p>
+                    <% if (user.how_long !== 'undefined' && user.how_long !== null && user.how_long !== '') { %>
+                        How Long: <%= user.how_long%>
+                    <% } %>
+                    </p>
+                    <p>
+                    <% if (user.save_amount !== 'undefined' && user.save_amount !== null && user.save_amount !== '' && user.how_long !== 'undefined' && user.how_long !== null && user.how_long !== '') { %>
+                        Total: <%= parseFloat(user.save_amount * user.how_long * 30).toFixed(2)%>
+                    <% } %>
+                    </p>
+                    
+                </div>
+                <div class="col-md-12">
+                    <p></p>
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2"><h2>Stocks</h2></div>
+                        <% if(typeof user_stocks === 'object' && user_stocks !== null && user_stocks !== 'undefined' && user_stocks.length) { %>
+                        <% for(var key in user_stocks) { %>
+                        <div class="col-md-8 col-md-offset-2">
+                            <%= user_stocks[key].name %> (<%= user_stocks[key].symbol %>) @ <%= user_stocks[key].price %>  <a href='stocks/<%= user_stocks[key].id %>/delete'>Delete</a>
+                        </div>
+                        
+                        <% } %>
+                        <% } else { %>
+                        <div class="col-md-8 col-md-offset-2">
+                            No Stocks added. 
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    </body>
+</html>
